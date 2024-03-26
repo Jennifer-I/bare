@@ -53,5 +53,32 @@ class StockServiceImplTest {
         assertEquals(5, result.size()); // Assuming 5 stocks are initialized
     }
 
+    @Test
+    void getStockById_shouldReturnStockById() {
+        Stock actualStock = new Stock(1L, "Stock1", new BigDecimal("100.00"));
+        when(stocks.stream()).thenReturn(Stream.of(actualStock));
+
+        log.info("arrange");
+        long id = 1L;
+        Stock expectedStock = stockService.getStockById(id);
+        assertEquals(expectedStock, actualStock);
+
+    }
+
+
+    @Test
+    void updateStockPrice_shouldUpdateStockPrice() {
+        log.info("arrange");
+        long id = 1;
+        BigDecimal newPrice = new BigDecimal("200.00");
+        Stock stock = new Stock("Stock1", new BigDecimal("100.00"));
+        when(stocks.stream()).thenReturn(Stream.of(stock));
+
+        log.info("act");
+        Stock result = stockService.updateStockPrice(id, newPrice);
+
+        log.info("assert");
+        assertEquals(newPrice, result.getCurrentPrice());
+    }
 
 }
