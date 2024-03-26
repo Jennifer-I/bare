@@ -115,6 +115,7 @@ mvn test
 
 ## Sample Image Responses
 ### Get All Stocks
+
 ![This is email verification screenshot](src/main/resources/static/Create Stock.png)
 
 ### Get One Stock
