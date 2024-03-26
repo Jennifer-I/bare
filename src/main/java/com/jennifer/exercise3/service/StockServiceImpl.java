@@ -58,5 +58,9 @@ public class StockServiceImpl  implements StockService {
         }
         throw new StockNotFoundException("Stock not found with id: " + id);
     }
+    @Override
+    public List<Stock> getAllStocks() {
+        return stocks;
+    }
 
 }

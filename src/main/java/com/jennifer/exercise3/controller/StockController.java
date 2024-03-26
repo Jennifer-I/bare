@@ -9,9 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("stock")
+@RequestMapping("ape/stocks")
 public class StockController {
 
 
@@ -36,6 +38,11 @@ public class StockController {
         } catch (Exception e) {
             return new ResponseEntity<>(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error", null), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    @GetMapping("/getAllStocks")
+    public ResponseEntity<ApiResponse<List<Stock>>> getAllStocks() {
+        List<Stock> stocks = stockService.getAllStocks();
+        return new ResponseEntity<>(new ApiResponse<>(HttpStatus.OK, "Stocks retrieved successfully", stocks), HttpStatus.OK);
     }
 
 
