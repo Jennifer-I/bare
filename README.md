@@ -116,13 +116,13 @@ mvn test
 ## Sample Image Responses
 ### Get All Stocks
 
-![This is email verification screenshot](src/main/resources/static/Create Stock.png)
+![This is email verification screenshot](src/main/resources/static/Create_Stock.png)
 
 ### Get One Stock
-![This is email verification screenshot](src/main/resources/static/Get Stock By ID.png)
+![This is email verification screenshot](src/main/resources/static/Get_Stock_By_ID.png)
 
 ### Update Stock Price
-![This is email verification screenshot](src/main/resources/static/Update Stock Price.png)
+![This is email verification screenshot](src/main/resources/static/Update_Stock_Price.png)
 
 ### Create Stock
-![This is email verification screenshot](src/main/resources/static/Create Stock.png)
+![This is email verification screenshot](src/main/resources/static/Create_Stock.png)

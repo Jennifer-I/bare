@@ -44,6 +44,14 @@ class StockServiceImplTest {
         log.info("assert");
         assertEquals(newStock, result);
     }
+    @Test
+    void getAllStocks_shouldReturnAllStocks() {
+        log.info("act");
+        List<Stock> result = stockService.getAllStocks();
+
+        log.info("assert");
+        assertEquals(5, result.size()); // Assuming 5 stocks are initialized
+    }
 
 
 }
