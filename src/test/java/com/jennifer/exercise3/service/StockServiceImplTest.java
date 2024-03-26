@@ -18,6 +18,32 @@ import static org.mockito.Mockito.*;
 
 @Slf4j
 class StockServiceImplTest {
+    @Mock
+    private List<Stock> stocks;
+
+    @InjectMocks
+    private StockServiceImpl stockService;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        log.info("call initialize stock before each test ");
+        stockService.initializeStocks();
+    }
+
+
+    @Test
+    void createStock_shouldCreateNewStock() {
+        log.info("arrange");
+        Stock newStock = new Stock(1L,"Stock1", new BigDecimal("100.00"));
+        when(stocks.add(any())).thenReturn(true);
+
+        log.info("act");
+        Stock result = stockService.createStock(newStock);
+
+        log.info("assert");
+        assertEquals(newStock, result);
+    }
 
 
 }
