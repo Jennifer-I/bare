@@ -45,6 +45,16 @@ public class StockController {
         List<Stock> stocks = stockService.getAllStocks();
         return new ResponseEntity<>(new ApiResponse<>(HttpStatus.OK, "Stocks retrieved successfully", stocks), HttpStatus.OK);
     }
-
+    @PutMapping("/updatePrice/{id}")
+    public ResponseEntity<ApiResponse<Stock>> updateStockPrice(@PathVariable Long id, @RequestParam BigDecimal newPrice) {
+        try {
+            Stock updatedStock = stockService.updateStockPrice(id, newPrice);
+            return new ResponseEntity<>(new ApiResponse<>(HttpStatus.OK, "Stock price updated successfully", updatedStock), HttpStatus.OK);
+        } catch (StockNotFoundException e) {
+            return new ResponseEntity<>(new ApiResponse<>(HttpStatus.NOT_FOUND, e.getMessage(), null), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error", null), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }

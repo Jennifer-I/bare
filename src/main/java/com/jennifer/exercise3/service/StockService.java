@@ -12,4 +12,5 @@ public interface StockService {
 
     List<Stock> getAllStocks();
 
+    Stock updateStockPrice(Long id, BigDecimal newPrice);
 }

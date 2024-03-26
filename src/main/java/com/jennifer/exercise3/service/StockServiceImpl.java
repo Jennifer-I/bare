@@ -65,5 +65,20 @@ public class StockServiceImpl  implements StockService {
 
 
 
+    @Override
+    public Stock updateStockPrice(Long id, BigDecimal newPrice) {
+        try {
+            Stock stock = getStockById(id);
+            stock.setCurrentPrice(newPrice);
+            stock.setLastUpdate(new Timestamp(System.currentTimeMillis()));
+            return stock;
+        } catch (StockNotFoundException e) {
+            LOG.error("Failed to update stock price: Stock not found with id {}", id);
+            throw e;
+        } catch (Exception e) {
+            LOG.error("Failed to update stock price", e);
+            throw new RuntimeException("Failed to update stock price", e);
+        }
+    }
 
 }
