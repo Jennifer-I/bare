@@ -1,6 +1,7 @@
-package com.jennifer.exercise3.model;
+package com.jennifer.exercise3.service;
 
-import com.jennifer.exercise3.model.response.StockService;
+import com.jennifer.exercise3.Exception.StockNotFoundException;
+import com.jennifer.exercise3.model.Stock;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,4 +48,15 @@ public class StockServiceImpl  implements StockService {
         createStock(new Stock(5L,"Stock5", new BigDecimal("300.00")));
 
     }
+
+    @Override
+    public Stock getStockById(Long id) {
+        for (Stock stock : stocks) {
+            if (stock.getId().equals(id)) {
+                return stock;
+            }
+        }
+        throw new StockNotFoundException("Stock not found with id: " + id);
+    }
+
 }

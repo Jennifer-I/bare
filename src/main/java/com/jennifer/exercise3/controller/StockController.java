@@ -1,0 +1,42 @@
+package com.jennifer.exercise3.controller;
+
+import com.jennifer.exercise3.Exception.StockNotFoundException;
+import com.jennifer.exercise3.model.Stock;
+import com.jennifer.exercise3.response.ApiResponse;
+import com.jennifer.exercise3.service.StockService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("stock")
+public class StockController {
+
+
+    private final StockService stockService;
+
+    @PostMapping("/createStock")
+    public ResponseEntity<ApiResponse<Stock>> createStock(@RequestBody Stock stock) {
+        try {
+            Stock createdStock = stockService.createStock(stock);
+            return new ResponseEntity<>(new ApiResponse<>(HttpStatus.CREATED, "Stock created successfully", createdStock), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error", null), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<Stock>> getStockById(@PathVariable Long id) {
+        try {
+            Stock stock = stockService.getStockById(id);
+            return new ResponseEntity<>(new ApiResponse<>(HttpStatus.OK, "Stock retrieved successfully", stock), HttpStatus.OK);
+        } catch (StockNotFoundException e) {
+            return new ResponseEntity<>(new ApiResponse<>(HttpStatus.NOT_FOUND, e.getMessage(), null), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error", null), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+}

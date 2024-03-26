@@ -1,4 +1,4 @@
-package com.jennifer.exercise3.model.response;
+package com.jennifer.exercise3.response;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
